@@ -1,8 +1,8 @@
-# Maintainer: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgname=mallard-ducktype
 pkgver=1.0.2
-pkgrel=9
+pkgrel=10
 pkgdesc="Parser for the lightweight Ducktype syntax for Mallard"
 url="http://projectmallard.org"
 arch=(any)
@@ -13,15 +13,13 @@ makedepends=(
   python-build
   python-installer
   python-setuptools
-  python-wheel)
-_commit=5d0fe2c23571f4463b77afa1ffd2c2bf5e6316f4  # tags/1.0.2^0
-source=("git+https://github.com/projectmallard/mallard-ducktype#commit=$_commit")
-sha256sums=('SKIP')
-
-pkgver() {
-  cd $pkgname
-  git describe --tags | sed 's/-/+/g'
-}
+  python-wheel
+)
+source=("git+https://github.com/projectmallard/mallard-ducktype?signed#tag=$pkgver")
+b2sums=('52e3a2e45ac5eaff7e2aed73177088238b9bb9bb45025259fd9814aa676e5c9c1f2d726493d6a67b6d2cd334afb393a5f67d06fffab403a37eae243732d1be38')
+validpgpkeys=(
+  4E03CB89E1C8ED8E049367ABE5D9AD24CC3ADF80 # Shaun McCance <shaunm@gnome.org>
+)
 
 build() {
   cd $pkgname
@@ -33,3 +31,5 @@ package() {
   python -m installer --destdir="$pkgdir" dist/*.whl
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 COPYING
 }
+
+# vim:set sw=2 sts=-1 et:
