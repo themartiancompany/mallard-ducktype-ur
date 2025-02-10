@@ -62,6 +62,12 @@ makedepends=(
   "${_py}-setuptools"
   "${_py}-wheel"
 )
+provides=(
+  "${_py}-${pkgname}=${pkgver}"
+)
+conflicts=(
+  "${_py}-${pkgname}"
+)
 _http="https://github.com"
 _ns="project${_proj}"
 _url="${_http}/${_ns}/${pkgname}"
